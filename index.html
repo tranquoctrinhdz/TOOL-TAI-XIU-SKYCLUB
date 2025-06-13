@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tool Tài Xỉu SkyClub VIP</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #05021d, #1a0033);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00fff7;
+            margin-bottom: 20px;
+        }
+        .input-area {
+            margin: 10px 0;
+        }
+        input {
+            width: 60px;
+            text-align: center;
+            font-size: 20px;
+            margin: 4px;
+            background-color: #111;
+            color: #0ff;
+            border: 2px solid #0ff;
+        }
+        .btn {
+            background-color: #ff00cc;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #00ffcc;
+            background-color: #140032;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">TOOL TÀI XỈU SKY CLUB VIP</div>
+    <div>Nhập 20 kết quả gần nhất:</div>
+    <div class="input-area" id="inputArea"></div>
+    <button class="btn" onclick="predict()">Dự đoán</button>
+    <div class="result-box" id="result">Dự đoán sẽ hiển thị tại đây</div>
+
+    <script>
+        const inputArea = document.getElementById("inputArea");
+        for (let i = 0; i < 20; i++) {
+            inputArea.innerHTML += `<input id="i${i}" maxlength="1" placeholder="?">`;
+        }
+
+        function predict() {
+            const data = [];
+            for (let i = 0; i < 20; i++) {
+                let val = document.getElementById("i" + i).value.trim().toUpperCase();
+                if (val !== "T" && val !== "X") {
+                    document.getElementById("result").innerHTML = "Nhập T hoặc X cho mỗi ô!";
+                    return;
+                }
+                data.push(val);
+            }
+            const counts = { T: 0, X: 0 };
+            data.forEach(d => counts[d]++);
+            let next = counts.T > counts.X ? "XỈU" : "TÀI";
+            document.getElementById("result").innerHTML = `🧠 Dự đoán phiên tiếp: <b>${next}</b><br>🧪 (T: ${counts.T} | X: ${counts.X})`;
+        }
+    </script>
+</body>
+</html>
